@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "expo-react-boilerplate",
+    "description": "A starter kit for expo and react mobile apps",
+    "slug": "mobile",
+    "privacy": "public",
+    "sdkVersion": "18.0.0",
+    "version": "1.0.5",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icons/app.png",
+    "loading": {
+      "icon": "./assets/icon.png",
+      "backgroundColor": "#00C1F8",
+      "hideExponentText": false
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4"]
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ai.expo-react-boilerplate.mobile"
+    }
+  }
+}
