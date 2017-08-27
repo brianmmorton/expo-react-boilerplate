@@ -61,7 +61,7 @@ export const fetchUser = (token: string, query: ?object) => {
     dispatch(getUser());
 
     return new Promise((resolve, reject) => {
-      request.get(API + '/api/users')
+      request.get(API + '/users')
         .auth('JWT ' + token)
         .query(query)
         .end((err, res) => {

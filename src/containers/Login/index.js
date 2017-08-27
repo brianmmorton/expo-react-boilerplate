@@ -6,7 +6,7 @@ import connect from './connect'
 import { Actions } from 'react-native-router-flux'
 import styles from './styles'
 import { LIGHT_BLUE, DARK_BLUE, PURPLE } from '@theme/colors'
-import { BaseGradient, Text, Butan } from '@components'
+import { Text } from '@components'
 import { LinearGradient, Segment } from 'expo'
 import scale from '@utils/scale'
 
@@ -24,6 +24,7 @@ import {
   , FormLabel
   , FormInput
   , Icon
+  , Button
 } from 'react-native-elements'
 
 type Props = {
@@ -94,7 +95,7 @@ class LoginContainer extends Component {
 
           <View>
             <Image
-              style={{ width: scale(190), height: scale(40) }}
+              style={{ width: scale(80), height: scale(80) }}
               source={require('../../img/logo.png')}
             />
           </View>
@@ -148,9 +149,8 @@ class LoginContainer extends Component {
 
             <View style={styles.loginButton}>
               {!this.state.loading && (
-                <Butan
+                <Button
                   block
-                  textStyle={{ color: '#CE9FFC' }}
                   fontSize={scale(14)}
                   height={scale(40)}
                   onPress={() => this.login()}

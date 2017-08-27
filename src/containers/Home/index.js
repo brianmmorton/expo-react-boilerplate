@@ -3,13 +3,28 @@
 import React, { Component } from 'react'
 import { Actions } from 'react-native-router-flux'
 import io from '@services/socket-io'
+import { Dimensions, TouchableOpacity, View } from 'react-native'
 
 const { height, width } = Dimensions.get('window');
+import scale from '@utils/scale';
 
 import styles from './styles'
 import connect from './connect'
 
 import { Text } from '@components';
+import { LinearGradient } from 'expo';
+
+import {
+  Container
+  , Content
+  , Header
+  , Title
+  , Body
+  , Icon
+  , Left
+  , Right
+  , Spinner
+} from 'native-base'
 
 type Props = {
   user: object,
@@ -23,11 +38,16 @@ class HomeContainer extends Component {
 
   state = {}
 
+  componentDidMount () {
+    this.init();
+  }
+
   componentWillReceiveProps ({ user }) {
+    console.log('LOADING HOME CONTAINER');
     if (!user.loading && user.data) {
       console.log(`Initiating user for ${user.data.name} ${user.data.id}`);
 
-      Segment.identifyWithTraits(user.data.id, { name: user.data.name, company: user.data.company.name, created_at: user.data.created_at })
+      Segment.identifyWithTraits(user.data.id, { name: user.data.name, created_at: user.data.created_at })
       Segment.track('view-home-mobile');
 
       /*
@@ -45,8 +65,12 @@ class HomeContainer extends Component {
   }
 
   init () {
+    console.log('INIT');
     this.props.fetchToken()
       .then(token => {
+        if (!token) {
+          throw { status: 401 }
+        }
         return this.props.fetchUser(token)
       })
       .catch(res => {
@@ -65,7 +89,7 @@ class HomeContainer extends Component {
   }
 
   render () {
-    const { monthlyStats, projects, user } = this.props;
+    const { user } = this.props;
 
     return (
       <Container>
@@ -94,38 +118,19 @@ class HomeContainer extends Component {
   }
 
   renderMain () {
-    const { month, year, error, loading } = this.state;
-    const { monthlyStats, projects } = this.props;
+    const { error } = this.state;
 
     if (error) {
       return (
         <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center' }}>
           <Text style={{ textAlign: 'center', color: '#FFF' }}>{error}</Text>
-          <View style={{ marginTop: 20, justifyContent: 'center' }}>
-            <Butan
-              raised
-              name='Try Again'
-              onPress={::this.retry}
-             />
-          </View>
         </View>
       )
     }
-
-    if (loading) {
-      return (
-        <View style={{ alignItems: 'center', justifyContent: 'center', height }}>
-          <Spinner color='#FFF' fontSize={scale(12)} />
-          <Text style={{ color: '#FFF' }}>Loading month...</Text>
-        </View>
-      )
-    }
-
-    const weeks = getWeeks(month, year);
 
     return (
       <View style={{ marginTop: scale(25) }}>
-        <Text>Hello!</Text>
+        <Text style={{ color: '#FFF', textAlign: 'center' }}>Hello!</Text>
       </View>
     )
   }

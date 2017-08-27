@@ -69,14 +69,8 @@ class Kernel extends Component {
         <Provider store={store}>
           <Router createReducer={reducerCreate}>
             <Scene key="root" hideNavBar hideTabBar>
-              <Scene key="modal" component={Modal} lightbox>
-                <Scene key="root" hideNavBar hideTabBar>
-                  <Scene key="home" component={HomeScene} title="Home" hideNavBar initial />
-                  <Scene key="login" component={LoginScene} title="Login" hideNavBar />
-                </Scene>
-
-                {/* <Scene key="someModal" component={SomeModal} /> */}
-              </Scene>
+              <Scene key="home" component={HomeScene} title="Home" hideNavBar initial />
+              <Scene key="login" component={LoginScene} title="Login" hideNavBar />
             </Scene>
           </Router>
         </Provider>
